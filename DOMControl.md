@@ -3,7 +3,7 @@
 ## 1. DOM Tree
 
 - `웹 페이지의 내용은` **Document 객체가 관리한다.**
-- 웹 브라우저가 `웹 페이지를 읽어 들이면` **`렌더링 엔진은`** 웹 패이지의 `HTML 문서 구문을 해석하고` `Document 객체에서` 문서 내용을 관리하는 `DOM 트리라고 하는 객체의` **트리 구조를 만든다.**
+- 웹 브라우저가 `웹 페이지를 읽어 들이면` **`렌더링 엔진은`** 웹 페이지의 `HTML 문서 구문을 해석하고` `Document 객체에서` 문서 내용을 관리하는 `DOM 트리라고 하는 객체의` **트리 구조를 만든다.**
 - 웹 브라우저가 HTML 문서를 읽어 들이면 **`Document 객체로 시작하는 DOM 트리가 만들어진다.`**
 - DOM 트리를 구성하는 객체 하나를 노드(Node)라고 한다. 
     - Document 노드: 전체 Document(문서)를 가리키는 `Document 객체`, `document로` **참조 할 수 있다.**
@@ -82,7 +82,7 @@ property | 의미
 
 property | return
 ---|---|
-`document.getElementByID(id 값);`                           | 이 요소와 자식 요소 참조를 저장한 유사 배열 객체(NodeList)
+`document.getElementById(id 값);`                           | 이 요소와 자식 요소 참조를 저장한 유사 배열 객체(NodeList)
 `document.getElementsByTagName(요소와 태그 이름);`           | NodeList 객체
 `document.getElementsByName(name 속성 값);`                 | NodeList 객체
 `document.getElementsByClassName(class 이름);`              | NodeList 객체
@@ -90,7 +90,7 @@ property | return
 `document.querySelector(선택자);`                           | 선택자와 일치하는 요소 개체 중에서 문서 위치가 첫 번째인 요소 객체를 반환
 
 - 여기서 **`NodeList 객체는`** **'살아 있는'** `상태를` 가리킨다. 
-  - 즉, 이 객체는 특정 시점의 `정적인 상태를 표현하는 거싱 아니라` **HTML 문서의 변화에 따라 동적으로 바뀐다.**
+  - 즉, 이 객체는 특정 시점의 `정적인 상태를 표현하는 것이 아니라` **HTML 문서의 변화에 따라 동적으로 바뀐다.**
 - **`querySelectorAll은`** HTML 문서의 내용이 바뀌어도 반환한 NodeList값은 바뀌지 않는다.**(정적인 상태를 가져온다.)**
   - `querySelectorAll` 는 일치한 `요소가 없을 때` 빈 NodeList를 반환한다.
   - `querySelectorAll` 과 `querySelector` 메서드는 `:first-line, :first-letter, :link, :visited 의` **`의사 선택자를 지원하지 않는다.`**
@@ -103,7 +103,7 @@ property | return
   - HTMLColletion 객체의 요소는 배열 요소의 인덱스 뿐만 아니라 id 속성값, name 속성 값으로 참조할 수 있다. 
 
 property | 의미
----|:---:|
+---|---|
 `document.documentElement`                | 문서의 루트 요소(html 요소) 객체의 참조
 `document.head`                           | 문서의 head 요소 객체의 참조 
 `document.body`                           | 문서의 body 요소 객체의 참조
@@ -214,19 +214,21 @@ Event | 설명
 
 1. innerHTML 프로퍼티
 
-- innerHTML 프로퍼티는 요소 안의 `HTML 코드를 가리킨다.`
+   - innerHTML 프로퍼티는 요소 안의 `HTML 코드를 가리킨다.`
 
 2. textContent와 innerText 프로퍼티
 
-- `textContent `프로퍼티는 요소의 내용을 웹 페이지에 표시했을 때의 **텍스트 정보를 표시한다.**
-  - textContent 프로퍼티 값은 `지정한 요소의 자식 노드인` **모든 텍스트 노드를 연결한 값이다.**
-    - textContent는 script 요소 안의 텍스트를 반환하지만 innerText는 반환하지 않는다.
-    - textContent는 공백 문자를 그대로 반환하지만 innerText는 남는 공백문자를 제거한다.
-    - innerText는 table, tbody, tr 요소 등의 테이블 요소를 수정할 수 없다.
+   - `textContent `프로퍼티는 요소의 내용을 웹 페이지에 표시했을 때의 **텍스트 정보를 표시한다.**
+     - textContent 프로퍼티 값은 `지정한 요소의 자식 노드인` **모든 텍스트 노드를 연결한 값이다.**
+      - textContent에 텍스트를 대입하면 요소의 내용을 텍스트로 바꿀 수 있다.
+        - &, < , > 등의 HTML 특수문자가 이스케이프 되어 HTML로 표시할 수 있는 문자열로 바뀐다.
+      - textContent는 script 요소 안의 텍스트를 반환하지만 innerText는 반환하지 않는다.
+      - textContent는 공백 문자를 그대로 반환하지만 innerText는 남는 공백문자를 제거한다.
+      - innerText는 table, tbody, tr 요소 등의 테이블 요소를 수정할 수 없다.
 
 ## 5. 노드 생성/삽입/삭제 하기
 
-1. CREATE Element (요소 생성)
+1. [CREATE] Element (요소 생성)
 
 ```js
     var element = document.createElement(요소의 이름);
@@ -254,7 +256,7 @@ method | 설명
 `document.importNode(다른 문서의 노드, deep)`      | 다른 문서에 있는 노드를 복사한다. deep을 true로 설정하면 자식 노드까지 복사하고, false로 설정하면 얕은 복사를 한다.
 `node.cloneNode(deep)`                      | 노드를 복사한다. deep을 true로 설정하면 자식 노드까지 복사하고, false로 설정하면 얕은 복사를 한다.
 
-1. INSERT (노드 삽입하기)
+1. [INSERT] (노드 삽입하기)
 
 ```js
     요소 노드.appendChild(삽입할 노드) // 요소의 마지막 자식 노드로 삽입한다.
@@ -268,25 +270,53 @@ method | 설명
     요소 노드.insertBefore(삽입할 노드, 자식 노드)
 ```
 
-2. DELETE (노드 삭제하기)
+2. [DELETE] (노드 삭제하기)
 
 ```JS
     노드.removeChild(자식 노드)
 ```
 
+- 노드의 자식 노드를 삭제한다.
 - 이때 `삭제할 수 있는 노드가` 해당 노드의 **자식 노드이다.**
   - 특정한 노드를 삭제하고자 할 때
-    - Anode.paretNode.removeChild(Bnode)
+    - node.paretNode.removeChild(node)
 
-3. REPLACE (노드 치환하기)
+3. [REPLACE] (노드 치환하기)
 
 ```js
     노드.replaceChild(새로운 노드,자식 노드)
 ```
 
+- 인수로 받은 자식 노드를 제거하고 새로운 노드로 치환한다.
 - 이때 `치환 할 수 있는 노드가` 해당 노드의 **자식 노드이다.**
   - 특정한 노드를 삭제하고자 할 때
-  - Anode.paretNode.replaceChild(newNode, Bnode)
+  - node.paretNode.replaceChild(newNode, node)
+
+### HTML 요소 생성하는 함수 custom
+
+```js
+  function elt(name, attributes) {
+    var node = document.createElement(name);
+    if(attributes) {
+      for(var attr in attributes) {
+        if(attributes.hasOwnProperty(attr)) {
+          node.setAttribyute(attr,attributes[attr]);
+        }
+      }
+    }
+    for(var i=2; i < arguments.length; i++) {
+      var child = arguments[i];
+      if(typeof child == "string" ) {
+        child = document.createTextNode(child);
+      }
+      node.appendChild(child);
+    }
+    return node;
+  }
+
+  var headline = elt("h1", null, "DOM Create Test");
+  document.body.appendChild(headline);
+```
 
 ## 6. HTML 요소의 위치
 
@@ -370,7 +400,24 @@ method | 설명
 - Window 객체의 scrollBy 메서드는 스크롤할 거리를 인수로 받아 문서를 그 거리만큼 스크롤 한다.
 
 ```js
-    window.scrollBy(dx, dy);
+    window.scrollBy(dx,dy);
+```
+
+##### 부드러운 스크롤
+
+```js
+  function smothScroll(id, durationTime) {
+    var TIME_INTERVAL = 30;
+    var element = document.getElementById(id);
+    if( !element ) return;
+    var ey = element.getBoundingClientRect().top;
+    var dy = ey * TIME_INTEVAL/durationTime;
+    var direction = dy > 0 ? 1 : -1;
+    var timer = setInterval(function(){
+      scrollBy(0,dy); ey -=dy;
+      if(direction*ey <= 0 ) clearInterval(timer);
+    }, TIME_INTERVAL);
+  }
 ```
 
 #### 특정 요소가 있는 위치까지 스크롤 하기
